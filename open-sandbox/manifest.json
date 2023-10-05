@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "SandBoxes",
+  "version": "1.0.0",
+  "icons": {
+    "512": "images/icon-512.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

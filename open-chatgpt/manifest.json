@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Open ChatGPT",
+  "version": "1.0.0",
+  "icons": {
+    "512": "images/icon-512.png"
+  },
+  "action": {},
+  "background": {
+    "service_worker": "background.js"
+  }
+}

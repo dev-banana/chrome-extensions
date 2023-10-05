@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Reload CSS",
+  "version": "1.0.0",
+  "icons": {
+    "512": "images/icon-512.png"
+  },
+  "action": {},
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options/options.html"
+}
