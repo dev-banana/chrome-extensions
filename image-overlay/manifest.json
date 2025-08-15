@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Overlay Image (Image on Top)",
+  "version": "1.0.0",
+  "description": "Uploader une image et l'afficher en calque sur toutes les pages, avec zoom, position, opacité et clics passants.",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Overlay Image"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/contentScript.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "popup/popup.html",
+    "open_in_tab": true
+  }
+}

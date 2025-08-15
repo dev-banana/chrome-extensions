@@ -1,0 +1,67 @@
+/* Conteneur principal injecté par le content script */
+#overlay-image-root {
+    position: fixed;
+    inset: 0; /* occupe tout l'écran pour gérer cliquez-traversez/déplacements */
+    pointer-events: none; /* Par défaut, les clics passent au travers */
+    z-index: 2147483647; /* au-dessus de tout */
+}
+
+/* Wrapper de l'image pour pouvoir la déplacer/transformer */
+#overlay-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    will-change: transform, opacity, top, left;
+}
+
+#overlay-image-wrapper.unlocked {
+    cursor: move; /* lorsqu'on déverrouille pour déplacer */
+}
+
+#overlay-image {
+    display: block;
+    max-width: none; /* on gère l'échelle nous-mêmes */
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Petit badge d'état (optionnel) */
+#overlay-image-badge {
+    position: fixed;
+    right: 12px;
+    bottom: 50%;
+    font-family: system-ui, sans-serif !important;
+    font-size: 12px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 8px;
+    pointer-events: auto;
+    border: 0.5px solid white;
+    width: 170px;
+}
+
+#overlay-image-badge .overlay-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#overlay-image-badge .overlay-row .overlay-row-label {
+    width: 50px;
+    font-weight: 600;
+}
+
+#overlay-image-badge .overlay-row .overlay-row-value {
+    cursor: pointer;
+}
+
+#overlay-image-badge .overlay-row .overlay-row-icon {
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
