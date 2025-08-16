@@ -1,25 +1,50 @@
 {
   "manifest_version": 3,
-  "name": "Overlay Image (Image on Top)",
+  "name": "Overlay+",
   "version": "1.0.0",
-  "description": "Uploader une image et l'afficher en calque sur toutes les pages, avec zoom, position, opacité et clics passants.",
+  "description": "Upload an image and display it as an overlay on all pages, with zoom, position, opacity, and click-through options.",
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Overlay Image"
   },
   "permissions": [
-    "storage"
+    "activeTab",
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "background": {
+    "service_worker": "background/background.js"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content/contentScript.js"],
-      "css": ["content/content.css"],
+      "js": [
+        "shared/namespace.js",
+        "shared/constants.js",
+        "shared/chrome-adapter.js",
+        "shared/storage.js",
+        "shared/image-utils.js",
+        "shared/dom.js",
+
+        "overlay/interactions/drag-zoom.js",
+        "overlay/interactions/page-lock.js",
+        "overlay/display-mode.js",
+        "overlay/state.js",
+        "overlay/view.js",
+        "overlay/manager.js",
+        "overlay/main.js"
+      ],
+
+      "css": ["overlay/main.css"],
       "run_at": "document_idle"
     }
   ],

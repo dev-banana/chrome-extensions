@@ -1,9 +1,9 @@
 /* Conteneur principal injecté par le content script */
 #overlay-image-root {
     position: fixed;
-    inset: 0; /* occupe tout l'écran pour gérer cliquez-traversez/déplacements */
-    pointer-events: none; /* Par défaut, les clics passent au travers */
-    z-index: 2147483647; /* au-dessus de tout */
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999999999;
 }
 
 /* Wrapper de l'image pour pouvoir la déplacer/transformer */
@@ -11,7 +11,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform-origin: top left;
+    transform-origin: center center;
     will-change: transform, opacity, top, left;
 }
 
@@ -19,11 +19,17 @@
     cursor: move; /* lorsqu'on déverrouille pour déplacer */
 }
 
-#overlay-image {
+#overlay-image-img, #overlay-image-canvas {
     display: block;
     max-width: none; /* on gère l'échelle nous-mêmes */
     user-select: none;
     -webkit-user-drag: none;
+    pointer-events: none;
+}
+#overlay-image-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* Petit badge d'état (optionnel) */
@@ -32,14 +38,14 @@
     right: 12px;
     bottom: 50%;
     font-family: system-ui, sans-serif !important;
-    font-size: 12px;
+    font-size: 13px;
     padding: 6px 8px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border-radius: 8px;
     pointer-events: auto;
     border: 0.5px solid white;
-    width: 170px;
+    width: fit-content;
 }
 
 #overlay-image-badge .overlay-row {
@@ -49,19 +55,27 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     width: 100%;
+    margin-bottom: 3px;
 }
 
 #overlay-image-badge .overlay-row .overlay-row-label {
-    width: 50px;
+    width: 55px;
     font-weight: 600;
 }
+
 
 #overlay-image-badge .overlay-row .overlay-row-value {
     cursor: pointer;
 }
 
 #overlay-image-badge .overlay-row .overlay-row-icon {
-    font-size: 14px;
+    font-size: 20px;
     line-height: 1;
+}
+
+#overlay-image-badge .overlay-row .overlay-row-value, #overlay-image-badge .overlay-row .overlay-row-icon {
     cursor: pointer;
+}
+#overlay-image-badge .overlay-row .overlay-row-value:hover, #overlay-image-badge .overlay-row .overlay-row-icon:hover {
+    filter: brightness(1.2);
 }

@@ -1,77 +1,141 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Overlay Image</title>
-  <link rel="stylesheet" href="popup.css" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Overlay Image</title>
+    <link rel="stylesheet" href="popup.css"/>
 </head>
 <body>
-  <header>
-    <h1>Overlay Image</h1>
-  </header>
 
-  <section class="row">
-    <label class="switch">
-      <input type="checkbox" id="enabled" />
-      <span>Show Overlay</span>
+<header>
+    <h1>Overlay+</h1>
+    <label class="switch-toggle">
+        <input type="checkbox" id="enabled"/>
+        <span class="slider"></span>
     </label>
-  </section>
+</header>
 
-  <section>
+
+<section>
     <label class="file">
-      <input type="file" id="file" accept="image/*" />
-      <span>Choose an image…</span>
-    </label>
-  </section>
-
-  <section class="grid">
-    <label>Opacity <output id="opacityOut"></output>
-      <input type="range" id="opacity" min="0" max="1" step="0.01" />
+        <input type="file" id="file" accept="image/*"/>
+        <span>Choose an image…</span>
     </label>
 
-    <label>Zoom <output id="scaleOut"></output>
-      <input type="range" id="scale" min="0.05" max="5" step="0.01" />
+    <!-- Aperçu de l'image actuelle -->
+    <div class="image-preview" id="imagePreview" style="display: none;">
+        <div class="preview-header">
+            <span>Current image:</span>
+            <span class="image-info" id="imageInfo"></span>
+        </div>
+        <img id="previewImg" alt="Current overlay image"/>
+    </div>
+</section>
+
+
+<section class="grid">
+    <label>Opacity
+        <output id="opacityOut"></output>
+        <input type="range" id="opacity" min="0" max="1" step="0.01"/>
+    </label>
+
+    <label>Zoom
+        <output id="scaleOut"></output>
+        <input type="range" id="scale" min="0.05" max="5" step="0.01"/>
+    </label>
+
+    <label>Width (px)
+        <input type="number" id="width" min="1" placeholder="Auto"/>
+    </label>
+    <label>Height (px)
+        <input type="number" id="height" min="1" placeholder="Auto"/>
     </label>
 
     <label>Position X (px)
-      <input type="number" id="left" />
+        <input type="number" id="left"/>
     </label>
     <label>Position Y (px)
-      <input type="number" id="top" />
+        <input type="number" id="top"/>
     </label>
-  </section>
+</section>
 
-  <section class="row">
+<label>Rotation (deg)
+    <output id="rotateOut"></output>
+    <input type="range" id="rotate" min="0" max="360" step="0.01"/>
+</label>
+
+<hr/>
+
+<section class="row">
     <label class="switch">
-      <input type="checkbox" id="clickThrough" />
-      <span>Clicks through (let the page respond to clicks)</span>
+        <input type="checkbox" id="clickThrough"/>
+        <span>Clicks through (let the page respond to clicks)</span>
     </label>
-  </section>
+</section>
 
-  <section class="row">
+<section class="row">
     <label class="switch">
-      <input type="checkbox" id="unlocked" />
-      <span>Unlock overlay (move by drag + zoom with ctrl+wheel)</span>
+        <input type="checkbox" id="unlocked"/>
+        <span>Unlock overlay (move by drag + zoom with ctrl+wheel)</span>
     </label>
-  </section>
+</section>
 
-  <section class="row">
-      <label class="switch">
-          <input type="checkbox" id="lockPage" />
-          <span>Lock the page (disable the drag)</span>
-      </label>
-  </section>
+<section class="row">
+    <label class="switch">
+        <input type="checkbox" id="lockPage"/>
+        <span>Lock the page (disable the drag)</span>
+    </label>
+</section>
 
-  <section class="row">
+<hr/>
+
+<section class="row">
+    <label class="switch">
+        <input type="checkbox" id="displayMode"/>
+        <span>Enable Color Diff view</span>
+    </label>
+</section>
+<section class="grid">
+    <label>
+        Similar color<br/>
+        <input type="color" id="noDiffColor" value="#000000">
+    </label>
+    <label class="range">
+        <span>Alpha</span>
+        <input type="range" id="noDiffColorA" min="0" max="255" step="1" value="255">
+    </label>
+</section>
+<section class="grid">
+    <label class="range">
+        <span>Color Tolerance</span>
+        <input type="number" id="diffColorDelta" min="0" step="1"/>
+    </label>
+    <label class="range">
+        <span>Neighbor Radius </span>
+        <input type="number" id="diffNeighborRadius" min="0" step="1"/>
+    </label>
+</section>
+
+
+<hr/>
+
+<section class="row">
     <button id="reset">Reset</button>
     <button id="clear">Delete image</button>
-  </section>
+</section>
 
-  <footer>
+<footer>
     <small>Settings are automatically saved and restored.</small>
-  </footer>
+</footer>
 
-  <script src="popup.js" defer></script>
+<script src="../shared/namespace.js"></script>
+<script src="../shared/constants.js"></script>
+<script src="../shared/chrome-adapter.js"></script>
+<script src="../shared/storage.js"></script>
+<script src="../shared/image-utils.js"></script>
+<script src="../shared/dom.js"></script>
+
+<script src="popup.js" defer></script>
 </body>
 </html>
